@@ -1,69 +1,89 @@
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
+// Import your local images
+import logoDesign from "../pages/Assets/ChatGPT Image Aug 1, 2025, 01_02_23 PM.png";
+
+
+const projects = [
+  {
+    title: "Cinematic Video Edit",
+    description: "A smooth cinematic edit using Adobe Premiere Pro & After Effects.",
+    video: "https://www.youtube.com/embed/ScMzIvxBSi4",
+  },
+  {
+    title: "Logo Design",
+    description: "Minimalistic logo design made with Adobe Illustrator.",
+    image: logoDesign,
+  },
+  {
+    title: "Affiliate Marketing Landing Page",
+    description: "High-converting landing page built with React & Tailwind.",
+    internalLink: "/affiliate-marketing", // Internal route
+  },
+];
 
 export default function Projects() {
-  const projects = [
-    {
-      title: "Portfolio Website",
-      description: "A modern portfolio with animations and SEO.",
-      link: "https://your-vercel-url.vercel.app"
-    },
-    {
-      title: "Graphic Design Showcase",
-      description: "Collection of creative graphic designs and edits.",
-      link: "#"
-    },
-    {
-      title: "Affiliate Marketing Landing Page",
-      description: "High-converting product landing page design.",
-      link: "#"
-    }
-  ];
-
   return (
-    <section className="pt-24 px-8 min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+      className="p-8"
+    >
       <Helmet>
         <title>Projects | Sharyar Portfolio</title>
-        <meta name="description" content="Explore Sharyar's portfolio projects including web development, graphic design, and marketing campaigns." />
-        <meta property="og:title" content="Projects - Sharyar Portfolio" />
-        <meta property="og:description" content="See Sharyar's work in web development, video editing, graphic design, and affiliate marketing." />
+        <meta
+          name="description"
+          content="Explore my projects including cinematic video editing, logo design, and Amazon affiliate marketing."
+        />
+        <meta property="og:title" content="Sharyar Portfolio - Projects" />
+        <meta
+          property="og:description"
+          content="Browse through professional projects in video editing, logo design, and affiliate marketing."
+        />
         <meta property="og:url" content="https://your-vercel-url.vercel.app/projects" />
         <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
-      <h2 className="text-4xl font-bold mb-8 text-center">Projects</h2>
-      <motion.div 
-        className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.1 } }
-        }}
-      >
+      <h1 className="text-4xl font-bold mb-8">My Projects</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            className="p-6 rounded-xl bg-white/10 border border-white/20 shadow-md hover:shadow-xl transition transform hover:scale-105 backdrop-blur-md"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
-            }}
+            whileHover={{ scale: 1.05 }}
+            className="bg-white/10 backdrop-blur-lg p-4 rounded-xl shadow-lg"
           >
-            <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-            <p className="text-gray-300 mb-4">{project.description}</p>
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neonBlue hover:underline"
-            >
-              View Project →
-            </a>
+            {project.video ? (
+              <iframe
+                className="w-full h-48 rounded-lg"
+                src={project.video}
+                title={project.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-48 object-cover rounded-lg"
+              />
+            )}
+            <h2 className="text-xl font-bold mt-4">{project.title}</h2>
+            <p className="text-gray-300 text-sm">{project.description}</p>
+            {project.internalLink && (
+              <Link
+                to={project.internalLink}
+                className="inline-block mt-4 text-blue-400 hover:underline"
+              >
+                View Details →
+              </Link>
+            )}
           </motion.div>
         ))}
-      </motion.div>
-    </section>
+      </div>
+    </motion.div>
   );
 }
