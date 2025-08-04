@@ -1,38 +1,61 @@
+import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 
 export default function About() {
+  const skills = [
+    "React", "Tailwind CSS", "Framer Motion",
+    "Node.js", "Express", "MySQL",
+    "Video Editing", "Graphic Design", "Affiliate Marketing"
+  ];
+
   return (
-    <section className="pt-24 p-10 min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-      <motion.h2 
-        initial={{ opacity: 0, y: -20 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 0.7 }}
-        className="text-4xl font-bold text-center mb-8"
-      >
-        About Me
-      </motion.h2>
-      
+    <section className="pt-24 px-8 min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+      <Helmet>
+        <title>About | Sharyar Portfolio</title>
+        <meta name="description" content="Learn about Sharyar - developer & designer skilled in React, video editing, graphic design, and affiliate marketing." />
+        <meta property="og:title" content="About - Sharyar Portfolio" />
+        <meta property="og:description" content="Discover Sharyar's skills and experience in development and creative fields." />
+        <meta property="og:image" content="https://your-vercel-url.vercel.app/og-image.png" />
+        <meta property="og:url" content="https://your-vercel-url.vercel.app/about" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About - Sharyar Portfolio" />
+        <meta name="twitter:description" content="Discover Sharyar's skills and experience in development and creative fields." />
+        <meta name="twitter:image" content="https://your-vercel-url.vercel.app/og-image.png" />
+      </Helmet>
+
+      <h2 className="text-4xl font-bold mb-6">About Me</h2>
+      <p className="text-lg leading-7 mb-6">
+        I’m Sharyar, a passionate developer and designer with a focus on
+        building beautiful, functional, and user-friendly experiences. My
+        skillset combines coding expertise with creativity, including
+        video editing, graphic design, and affiliate marketing.
+      </p>
+
+      <h3 className="text-2xl font-semibold mt-8 mb-4">Skills</h3>
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }} 
-        animate={{ opacity: 1, scale: 1 }} 
-        transition={{ duration: 0.8 }}
-        className="backdrop-blur-lg bg-white/10 border border-white/20 max-w-3xl mx-auto p-8 rounded-xl shadow-lg"
+        className="grid grid-cols-2 md:grid-cols-3 gap-4"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: {
+            transition: { staggerChildren: 0.1 }
+          }
+        }}
       >
-        <p className="text-lg text-gray-300 leading-7">
-          Hello! I’m Sharyar, a passionate web developer focused on creating modern, 
-          interactive, and visually appealing applications. I love learning 
-          cutting-edge technologies and crafting seamless user experiences.
-        </p>
-        <p className="mt-6 text-lg text-gray-300 leading-7">
-          My skills include <span className="text-blue-400">React.js</span>, 
-          <span className="text-purple-400"> Tailwind CSS</span>, 
-          and backend experience with <span className="text-blue-400">Node.js</span> & 
-          <span className="text-purple-400"> MySQL</span>.
-        </p>
-        <p className="mt-6 text-lg text-gray-300 leading-7">
-          Outside of coding, I enjoy exploring creative design, contributing to open-source 
-          projects, and experimenting with new UI trends.
-        </p>
+        {skills.map((skill, index) => (
+          <motion.div
+            key={index}
+            className="p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-center shadow-md"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
+          >
+            {skill}
+          </motion.div>
+        ))}
       </motion.div>
     </section>
   );

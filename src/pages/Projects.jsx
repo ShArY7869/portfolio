@@ -1,32 +1,69 @@
-import Tilt from "react-parallax-tilt";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 export default function Projects() {
   const projects = [
-    { title: "Portfolio Website", desc: "React + Tailwind + Framer Motion", img: "/images/portfolio.png", link: "#" },
-    { title: "E-commerce Template", desc: "React + Redux + Stripe", img: "/images/ecommerce.png", link: "#" },
-    { title: "Chat App", desc: "Socket.io + Node.js", img: "/images/chat.png", link: "#" }
+    {
+      title: "Portfolio Website",
+      description: "A modern portfolio with animations and SEO.",
+      link: "https://your-vercel-url.vercel.app"
+    },
+    {
+      title: "Graphic Design Showcase",
+      description: "Collection of creative graphic designs and edits.",
+      link: "#"
+    },
+    {
+      title: "Affiliate Marketing Landing Page",
+      description: "High-converting product landing page design.",
+      link: "#"
+    }
   ];
 
   return (
-    <section className="pt-24 p-10 min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 dark:from-white dark:to-gray-100 text-white dark:text-black">
-      <h2 className="text-4xl font-bold text-center mb-8">Projects</h2>
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <section className="pt-24 px-8 min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+      <Helmet>
+        <title>Projects | Sharyar Portfolio</title>
+        <meta name="description" content="Explore Sharyar's portfolio projects including web development, graphic design, and marketing campaigns." />
+        <meta property="og:title" content="Projects - Sharyar Portfolio" />
+        <meta property="og:description" content="See Sharyar's work in web development, video editing, graphic design, and affiliate marketing." />
+        <meta property="og:url" content="https://your-vercel-url.vercel.app/projects" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+
+      <h2 className="text-4xl font-bold mb-8 text-center">Projects</h2>
+      <motion.div 
+        className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.1 } }
+        }}
+      >
         {projects.map((project, index) => (
-          <Tilt
+          <motion.div
             key={index}
-            tiltMaxAngleX={10}
-            tiltMaxAngleY={10}
-            className="p-6 rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 hover:shadow-neon transition"
+            className="p-6 rounded-xl bg-white/10 border border-white/20 shadow-md hover:shadow-xl transition transform hover:scale-105 backdrop-blur-md"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
           >
-            <LazyLoadImage src={project.img} alt={project.title} effect="blur" className="rounded-lg mb-4" />
             <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-            <p className="text-sm mb-4">{project.desc}</p>
-            <a href={project.link} className="text-neonBlue hover:text-neonPurple">View</a>
-          </Tilt>
+            <p className="text-gray-300 mb-4">{project.description}</p>
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neonBlue hover:underline"
+            >
+              View Project →
+            </a>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
