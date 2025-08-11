@@ -1,95 +1,60 @@
+import React from "react";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import heroImage from "../pages/Assets/Hero.png";
+// Update this path to your actual image path if different
+import heroImage from  "../pages/Assets/Hero1.jpg";
 
 export default function Home() {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      className="max-w-6xl mx-auto px-4 py-16"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative min-h-screen flex flex-col items-center justify-center text-center p-6"
     >
       <Helmet>
-        <title>Home | Sharyar Portfolio</title>
-        <meta
-          name="description"
-          content="Welcome to Sharyar's portfolio. I am skilled in video editing, graphic design, affiliate marketing, and coding."
-        />
-        <meta property="og:title" content="Sharyar Portfolio - Home" />
-        <meta
-          property="og:description"
-          content="A creative professional in video editing, graphic design, affiliate marketing, and development."
-        />
-        <meta property="og:type" content="website" />
+        <title>Sharyar — Full-Stack Developer & Creative</title>
+        <meta name="description" content="Sharyar - Video Editor, Graphic Designer, Affiliate Marketer, and Developer." />
+        <meta property="og:title" content="Sharyar — Portfolio" />
+        <meta property="og:description" content="Portfolio of Sharyar — video editing, design, affiliate marketing & development." />
       </Helmet>
 
-      {/* Background Image */}
-      <div className="absolute inset-0 -z-10">
-        <img
-          src={heroImage}
-          alt="Sharyar"
-          className="w-full h-full object-cover opacity-30"
-        />
-        <div className="absolute inset-0 bg-black/60"></div>
-      </div>
+      <div className="flex flex-col-reverse md:flex-row items-center gap-8">
+        {/* text */}
+        <div className="flex-1 text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+            Hi, I’m <span className="text-neonBlue">Sharyar</span>
+          </h1>
+          <p className="text-lg text-gray-300 mb-6 max-w-xl">
+            I build visual stories and digital products — <strong>video editing</strong>, <strong>graphic design</strong>, <strong>affiliate marketing</strong>, and <strong>web apps</strong>.
+          </p>
 
-      {/* Introduction */}
-      <motion.h1
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-4xl md:text-6xl font-bold text-white mb-4"
-      >
-        Hi, I'm Sharyar
-      </motion.h1>
-      <motion.p
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="text-lg text-gray-300 max-w-2xl mb-6"
-      >
-        A creative professional passionate about{" "}
-        <span className="text-blue-400 font-semibold">
-          Video Editing, Graphic Design, Affiliate Marketing, and Coding
-        </span>
-        . I help businesses and individuals tell their stories visually and grow online.
-      </motion.p>
-
-      {/* Buttons */}
-      <div className="space-x-4">
-        <Link
-          to="/projects"
-          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-        >
-          View Projects
-        </Link>
-        <Link
-          to="/contact"
-          className="px-6 py-3 bg-transparent border border-white text-white rounded-lg hover:bg-white hover:text-black transition"
-        >
-          Contact Me
-        </Link>
-      </div>
-
-      {/* Skills Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-        className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-white"
-      >
-        {["Video Editing", "Graphic Design", "Affiliate Marketing", "Coding"].map((skill, index) => (
-          <div
-            key={index}
-            className="bg-white/10 p-4 rounded-lg backdrop-blur-md hover:scale-105 transition"
-          >
-            {skill}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3">
+            <Link to="/projects" className="px-6 py-3 bg-gradient-to-r from-neonBlue to-neonPurple text-black font-semibold rounded-lg shadow-neon">
+              View Projects
+            </Link>
+            <Link to="/contact" className="px-6 py-3 border border-white/10 rounded-lg hover:bg-white/5">
+              Contact Me
+            </Link>
           </div>
-        ))}
-      </motion.div>
+
+          {/* Skills */}
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {["Video Editing","Graphic Design","Affiliate Marketing","React"].map((s) => (
+              <div key={s} className="p-3 bg-white/5 rounded-lg text-sm text-gray-200">
+                {s}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* image */}
+        <div className="w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden mx-auto shadow-lg border-4 border-white/10">
+          <img src={heroImage} alt="Sharyar" className="w-full h-full object-cover" />
+        </div>
+      </div>
     </motion.div>
   );
 }
