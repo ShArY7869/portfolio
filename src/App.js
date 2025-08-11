@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import AffiliateMarketing from "./pages/AffiliateMarketing";
 import Contact from "./pages/Contact";
+import Experience from "./pages/Experience";
 
 export default function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/affiliate-marketing" element={<AffiliateMarketing />} />
+            <Route path="/experience" element={<Experience />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </AnimatePresence>

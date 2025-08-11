@@ -30,6 +30,7 @@ export default function Navbar() {
           <Link to="/" className="hover:text-neonBlue">Home</Link>
           <Link to="/about" className="hover:text-neonBlue">About</Link>
           <Link to="/projects" className="hover:text-neonBlue">Projects</Link>
+          <Link to="/experience" className="hover:text-blue-500">Experience</Link>
           <Link to="/contact" className="hover:text-neonBlue">Contact</Link>
           <button
             onClick={() => setDark(!dark)}
