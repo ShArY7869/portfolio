@@ -8,6 +8,9 @@ import sharyVideo1 from "../pages/Assets/Shary.mp4";
 import sharyVideo2 from "../pages/Assets/Shary2.mp4";
 import videoThumb from "../pages/Assets/Hero.png";
 import landingPage from "../pages/Assets/ChatGPT Image Aug 1, 2025, 01_02_23 PM.png";
+import weatherAppThumb from "../pages/Assets/Icon.png";
+
+// Placeholder weather app thumbnail — replace with your own image if you want
 
 const projects = [
   {
@@ -36,6 +39,13 @@ const projects = [
     type: "image",
     src: landingPage,
     internal: "/affiliate-marketing"
+  },
+  {
+    title: "Weather App",
+    description: "A React app showing current and 5-day forecast with animated backgrounds based on weather conditions.",
+    type: "image",
+    src: weatherAppThumb,
+    internal: "/weather"
   }
 ];
 
@@ -52,15 +62,16 @@ export default function Projects() {
         {projects.map((p, idx) => (
           <motion.div key={idx} whileHover={{ scale: 1.02 }} className="bg-white/5 rounded-lg overflow-hidden shadow-neon">
             {p.type === "video" ? (
-             <video 
-  controls 
-  className="w-full h-auto aspect-video object-cover"
->
-  <source src={p.src} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+              <video controls className="w-full h-auto aspect-video object-cover">
+                <source src={p.src} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             ) : (
-              <img src={p.src} alt={p.title} className="w-full h-48 object-cover" />
+              <img
+                src={p.thumb ? p.thumb : p.src}
+                alt={p.title}
+                className="w-full h-48 object-cover"
+              />
             )}
 
             <div className="p-4">
