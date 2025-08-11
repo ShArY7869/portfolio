@@ -2,18 +2,26 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import logoDesign from "../pages/Assets/ChatGPT Image Aug 1, 2025, 01_02_23 PM.png"
 
-// You may add a thumbnail for video (optional)
+import logoDesign from "../pages/Assets/ChatGPT Image Aug 1, 2025, 01_02_23 PM.png";
+import sharyVideo1 from "../pages/Assets/Shary.mp4";
+import sharyVideo2 from "../pages/Assets/Shary2.mp4";
 import videoThumb from "../pages/Assets/Hero.png";
-import landingPage from "../pages/Assets/ChatGPT Image Aug 1, 2025, 01_02_23 PM.png"; // replace with your actual image path
+import landingPage from "../pages/Assets/ChatGPT Image Aug 1, 2025, 01_02_23 PM.png";
 
 const projects = [
   {
-    title: "Cinematic Video Edit",
+    title: "Cinematic Video Edit (Shary1)",
     description: "A cinematic edit using Premiere Pro & After Effects.",
     type: "video",
-    src: "https://www.youtube.com/embed/ScMzIvxBSi4", // replace with your video
+    src: sharyVideo1,
+    thumb: videoThumb
+  },
+  {
+    title: "Cinematic Video Edit (Shary2)",
+    description: "Another cinematic edit using Premiere Pro & After Effects.",
+    type: "video",
+    src: sharyVideo2,
     thumb: videoThumb
   },
   {
@@ -44,16 +52,13 @@ export default function Projects() {
         {projects.map((p, idx) => (
           <motion.div key={idx} whileHover={{ scale: 1.02 }} className="bg-white/5 rounded-lg overflow-hidden shadow-neon">
             {p.type === "video" ? (
-              <div className="relative">
-                <iframe
-                  src={p.src}
-                  title={p.title}
-                  className="w-full h-48"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
+             <video 
+  controls 
+  className="w-full h-auto aspect-video object-cover"
+>
+  <source src={p.src} type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
             ) : (
               <img src={p.src} alt={p.title} className="w-full h-48 object-cover" />
             )}
